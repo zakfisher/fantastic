@@ -1,5 +1,5 @@
 {
-  "name": "fantastic-ui",
+  "name": "fantastic",
   "version": "0.0.2",
   "description": "A lightweight UI framework featuring a zone-based breakpoint system.",
   "main": "fantastic.js",
