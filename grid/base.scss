@@ -1,0 +1,35 @@
+/* BASE */
+
+* {
+	font-family: sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	@include appearance(none);
+}
+
+html {
+	min-height: 100%;
+	position: relative;
+}
+
+body {
+	@extend .arial.large.bold;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+}
+
+.grid-h {
+	> * {
+		@include clearfix;
+		clear: none;
+		float: left;
+	}
+}
+
+.grid-v {
+	> * {
+		@include clearfix;
+	}
+}

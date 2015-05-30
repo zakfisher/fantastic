@@ -1,0 +1,95 @@
+/* Typography
+// ----------------------------------------------------------------------
+// This font factory creates font variations based on size and weight.
+// Common styles are defined once, and @extend is used for inheritance.
+*
+*  Example
+*
+*    h1 {
+*      @extend .font.size.weight;
+*    }
+*
+// ---------------------------------------------------------------------- */
+@font-face {
+  font-family: 'ArialRoundedMT';
+  src: url('../fonts/Arial_Rounded_MT/ArialRouMT.eot');
+}
+@font-face {
+  font-family: 'ArialRoundedMT';
+  src: url('../fonts/Arial_Rounded_MT/ArialRouMT.svg#ArialRoundedMT') format('svg'),
+  url('../fonts/Arial_Rounded_MT/ArialRouMT.woff') format('woff');
+}
+@font-face {
+  font-family: 'HeadlineOneHPLHS';
+  src: url('../fonts/HeadlineOne/HEADOH.eot');
+}
+@font-face {
+  font-family: 'HeadlineOneHPLHS';
+  src: url('../fonts/HeadlineOne/HEADOH.woff') format('woff'),
+  url('../fonts/HeadlineOne/HEADOH.svg#HeadlineOneHPLHS') format('svg');
+}
+
+$fonts:
+  arial, header;
+
+$fontSizes:   
+  (xlarge,   36), 
+  (large,    26),
+  (medium,   20),
+  (small,    18),
+  (xsmall,   14);
+
+$fontWeights: 
+  (bold,     600), 
+  (normal,   500), 
+  (light,    400),
+  (thin,     100);
+
+////////////////////////////
+// Create font variations //
+////////////////////////////
+
+@mixin fontFamily($font) {
+  @if $font == arial {
+    font-family: "ArialRoundedMT", 'helvetica neue', 'helvetica', 'arial', 'sans';
+  }
+  @if $font == header {
+    font-family: "HeadlineOneHPLHS", 'helvetica neue', 'helvetica', 'arial', 'sans';
+  }
+}
+
+@mixin makeFont($font) {
+  @each $size, $v in $fontSizes {  
+    @each $weight, $w in $fontWeights {  
+      .#{$font}.#{$size}.#{$weight} { 
+        @extend .#{$font}-family;
+        @extend .#{$size}-size;
+        @extend .#{$weight}-weight;
+      }
+    }
+  }
+}
+
+@mixin makeFonts() {
+  // Define Font Sizes (in pixels, convert to rems), 1rem = 16px
+  @each $size, $value in $fontSizes {  
+    .#{$size}-size {
+      font-size: rem($value); 
+      line-height: rem($value); 
+    }
+  }
+  // Define Font Weights
+  @each $weight, $value in $fontWeights {  
+    .#{$weight}-weight { font-weight: $value; }
+  }
+  // Define Font Families
+  @each $font in $fonts {  
+    .#{$font}-family { 
+      @include fontFamily($font);
+    }
+    @include makeFont($font);
+  }
+}
+
+@include makeFonts();
+

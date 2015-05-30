@@ -1,0 +1,21 @@
+$debug: true;
+
+//@import "bower_components/bourbon/app/assets/stylesheets/bourbon";
+
+@import "helpers";
+@import "grid/grid";
+@import "ui/ui";
+
+@if $debug == true {
+	@each $zone in $zones {
+		$i: index($zones, $zone);
+		@include zone($i) {
+			body:before {
+				content: 'zone #{$i}';
+				position: fixed;
+	  			margin: 10px;
+	  			z-index: 99999;
+			}
+		}
+	}
+}

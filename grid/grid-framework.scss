@@ -1,0 +1,26 @@
+/* GRIDS */
+
+@mixin grid($orientation, $grid) {
+	@extend .grid-#{$orientation};
+	@each $cell in $grid {
+		@include cell($cell);
+	}
+}
+
+@mixin cell($cell) {
+	$selector: nth($cell, 1);
+	$width:    nth($cell, 2);
+	$height:   nth($cell, 3);
+	$bg:       nth($cell, 4);
+
+	#{$selector} {
+		height: $height;
+		width: $width;
+		position: relative;
+		margin: 0 auto;
+
+		@if $bg {
+			background: $bg;
+		}
+	}
+}

@@ -1,0 +1,46 @@
+/* BREAKPOINTS */
+
+$bp1:  0px;
+$bp2:  320px;
+$bp3:  480px;
+$bp4:  640px;
+$bp5:  768px;
+$bp6:  1024px;
+$bp7:  1280px;
+$bp8:  1366px;
+$bp9:  1440px;
+$bp10: 1680px;
+
+$zones:
+	($bp1, $bp1),  ($bp2, $bp1),  ($bp3, $bp1),  ($bp4, $bp1),  ($bp5, $bp1),  ($bp6, $bp1),  ($bp7, $bp1),  ($bp8, $bp1),  ($bp9, $bp1),  ($bp10, $bp1),
+	($bp1, $bp2),  ($bp2, $bp2),  ($bp3, $bp2),  ($bp4, $bp2),  ($bp5, $bp2),  ($bp6, $bp2),  ($bp7, $bp2),  ($bp8, $bp2),  ($bp9, $bp2),  ($bp10, $bp2),
+	($bp1, $bp3),  ($bp2, $bp3),  ($bp3, $bp3),  ($bp4, $bp3),  ($bp5, $bp3),  ($bp6, $bp3),  ($bp7, $bp3),  ($bp8, $bp3),  ($bp9, $bp3),  ($bp10, $bp3),
+	($bp1, $bp4),  ($bp2, $bp4),  ($bp3, $bp4),  ($bp4, $bp4),  ($bp5, $bp4),  ($bp6, $bp4),  ($bp7, $bp4),  ($bp8, $bp4),  ($bp9, $bp4),  ($bp10, $bp4),
+	($bp1, $bp5),  ($bp2, $bp5),  ($bp3, $bp5),  ($bp4, $bp5),  ($bp5, $bp5),  ($bp6, $bp5),  ($bp7, $bp5),  ($bp8, $bp5),  ($bp9, $bp5),  ($bp10, $bp5),
+	($bp1, $bp6),  ($bp2, $bp6),  ($bp3, $bp6),  ($bp4, $bp6),  ($bp5, $bp6),  ($bp6, $bp6),  ($bp7, $bp6),  ($bp8, $bp6),  ($bp9, $bp6),  ($bp10, $bp6),
+	($bp1, $bp7),  ($bp2, $bp7),  ($bp3, $bp7),  ($bp4, $bp7),  ($bp5, $bp7),  ($bp6, $bp7),  ($bp7, $bp7),  ($bp8, $bp7),  ($bp9, $bp7),  ($bp10, $bp7),
+	($bp1, $bp8),  ($bp2, $bp8),  ($bp3, $bp8),  ($bp4, $bp8),  ($bp5, $bp8),  ($bp6, $bp8),  ($bp7, $bp8),  ($bp8, $bp8),  ($bp9, $bp8),  ($bp10, $bp8),
+	($bp1, $bp9),  ($bp2, $bp9),  ($bp3, $bp9),  ($bp4, $bp9),  ($bp5, $bp9),  ($bp6, $bp9),  ($bp7, $bp9),  ($bp8, $bp9),  ($bp9, $bp9),  ($bp10, $bp9),
+	($bp1, $bp10), ($bp2, $bp10), ($bp3, $bp10), ($bp4, $bp10), ($bp5, $bp10), ($bp6, $bp10), ($bp7, $bp10), ($bp8, $bp10), ($bp9, $bp10), ($bp10, $bp10);
+
+@mixin breakpoint($type, $bp) {
+	@if $type == h {
+		@media all and (min-width: $bp) {
+			@content;
+		}
+	}
+	@if $type == v {
+		@media all and (min-height: $bp) {
+			@content;
+		}
+	}
+}
+
+@mixin zone($zone) {
+	$coords: nth($zones, $zone);
+	$width: nth($coords, 1);
+	$height: nth($coords, 2);
+	@media all and (min-width: $width) and (min-height: $height) {
+		@content;
+	}
+}
